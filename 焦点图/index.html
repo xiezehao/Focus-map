@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>焦点图</title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				/*height: 0px;*/
+				padding: 0px;
+			}
+			#box{
+				width: 790px;
+				height: 340px;
+				float: left;
+				position:relative;
+			}
+			ul{
+				margin: 0px;
+				padding: 0px;
+				width: 790px;
+				height: 340px;
+				float: left;
+				
+			}
+			li{
+				margin: 0px;
+				position: absolute;
+				list-style-type: none;
+				z-index: 1;
+				opacity: 0;
+			}
+			.buttons{
+				width: 200px;
+				height: 25px;
+				position: absolute;
+				z-index: 2;
+				right: 0;
+				bottom: 0;
+			}
+			
+			.buttons button{
+				width: 23px;
+				height: 23px;
+			}
+			
+			.left{
+				width: 50px;
+				height: 340px;
+				/*text-align: center;
+				line-height: 340px;*/
+				display: none;
+			}
+			.left img{
+				width: 50px;
+				height: 50px;
+				position:absolute;
+				left: 0;
+				z-index: 1;
+				margin-top: 145px;
+				
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box" onmouseover="mouseOver()" onmouseout="mous
+eOut()">
+			<ul>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/6.jpg"/></li>
+				<li><img src="img/7.jpg"/></li>
+			</ul>
+			
+			<div class="buttons">
+				<button name="button" value="0" onclick="check(0)">1</button>
+				<button name="button" value="1" onclick="check(1)">2</button>
+				<button name="button" value="2" onclick="check(2)">3</button>
+				<button name="button" value="3" onclick="check(3)">4</button>
+				<button name="button" value="4" onclick="check(4)">5</button>
+				<button name="button" value="5" onclick="check(5)">6</button>
+				<button name="button" value="6" onclick="check(6)">7</button>
+			</div>
+			
+			<div class="left">
+				<img src="img/左箭头.png"/>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript">
+			var li=document.getElementsByTagName("li");
+			li[0].style.opacity="1";
+			var i=0;
+//			for(var k=0;k<=7;k++){
+				
+//			}
+			
+//			go();
+			
+			function go(value){
+//				i=value||0;
+				if(value!=null){
+					i=value;
+				}
+//				console.log(i);
+//				fadeOut(li[i]);
+				for (var k=0;k<=6;k++) {
+					li[k].style.opacity="0";
+				}
+				
+				li[i].style.opacity="1";
+				i++;
+				
+				if(i==7){
+					i=0;
+				}
+//				setTimeout(go(),1000);
+			}
+			
+			setInterval(go,1000*3);
+			
+			function check (value) {
+//				alert(value)
+				clearInterval();
+				li[value].style.opacity="1";
+				setInterval(go(value),1000*3);
+			}
+			
+		</script>
+	</body>
+</html>
