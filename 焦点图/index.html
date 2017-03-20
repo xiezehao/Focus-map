@@ -6,7 +6,6 @@
 		<style type="text/css">
 			*{
 				margin: 0px;
-				/*height: 0px;*/
 				padding: 0px;
 			}
 			#box{
@@ -44,28 +43,34 @@
 				height: 23px;
 			}
 			
-			.left{
+			.left,.right{
 				width: 50px;
 				height: 340px;
-				/*text-align: center;
-				line-height: 340px;*/
 				display: none;
+				position:absolute;
+				
 			}
-			.left img{
+			.left img,.right img{
 				width: 50px;
 				height: 50px;
 				position:absolute;
-				left: 0;
 				z-index: 1;
 				margin-top: 145px;
-				
+				cursor: pointer;
+			}
+			
+			.left{
+				left: 0;
+			}
+			
+			.right{
+				right: 0;
 			}
 			
 		</style>
 	</head>
 	<body>
-		<div id="box" onmouseover="mouseOver()" onmouseout="mous
-eOut()">
+		<div id="box" onmouseover="mouseOver()" onmouseout="mouseOut()">
 			<ul>
 				<li><img src="img/1.jpg"/></li>
 				<li><img src="img/2.jpg"/></li>
@@ -85,30 +90,29 @@ eOut()">
 				<button name="button" value="5" onclick="check(5)">6</button>
 				<button name="button" value="6" onclick="check(6)">7</button>
 			</div>
-			
-			<div class="left">
+			<div class="right" id="right">
+				<img src="img/右箭头.png"/>
+			</div>
+			<div class="left" id="left">
 				<img src="img/左箭头.png"/>
 			</div>
+			
+			
 			
 		</div>
 		
 		<script type="text/javascript">
+			var left=document.getElementById("left");
+			var right=document.getElementById("right");
 			var li=document.getElementsByTagName("li");
 			li[0].style.opacity="1";
-			var i=0;
-//			for(var k=0;k<=7;k++){
-				
-//			}
-			
-//			go();
+			var i=0;//记录图片标志
+			var time=4;
 			
 			function go(value){
-//				i=value||0;
 				if(value!=null){
 					i=value;
 				}
-//				console.log(i);
-//				fadeOut(li[i]);
 				for (var k=0;k<=6;k++) {
 					li[k].style.opacity="0";
 				}
@@ -119,17 +123,56 @@ eOut()">
 				if(i==7){
 					i=0;
 				}
-//				setTimeout(go(),1000);
+//				console.log(i);
 			}
 			
-			setInterval(go,1000*3);
+			setInterval(go,1000*time);
 			
 			function check (value) {
-//				alert(value)
 				clearInterval();
 				li[value].style.opacity="1";
-				setInterval(go(value),1000*3);
+				setInterval(go(value),1000*time);
 			}
+			
+			function mouseOver () {
+				left.style.display="block";
+				right.style.display="block";
+			}
+			
+			function mouseOut () {
+				left.style.display="none";
+				right.style.display="none";
+			}
+			
+			left.onclick=function(){
+				
+				clearInterval();
+//				console.log(i);
+				if(i==1){
+					i=6;
+				}else{
+					i-=2;
+				}
+				
+				if(i<0){
+					i=0;
+				}
+//				console.log(i);
+				li[i].style.opacity="1";
+				setInterval(go(i),1000*time);
+				
+			}
+			
+			right.addEventListener("click",function(){
+				clearInterval();
+//				console.log(i);
+				if(i==6){
+					i=0;
+				}
+//				console.log(i);
+				li[i].style.opacity="1";
+				setInterval(go(i),1000*time);
+			});
 			
 		</script>
 	</body>
